@@ -1,55 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Bot, Send, Sparkles, X, RotateCcw, Key, Check, AlertCircle } from 'lucide-react';
-
-const SYSTEM_PROMPT = `You are the official AI Portfolio Copilot for Ansh Chauhan, an exceptional Full-Stack & Generative AI Engineer.
-Your role is to provide deep, rigorous, technical, and accurate answers about Ansh's projects, architecture decisions, production experience at Sharnex, and technical skill set.
-
-KEY INFORMATION ABOUT ANSH CHAUHAN:
-- Title: Full-Stack & Generative AI Engineer
-- Education: Bachelor of Technology (B.Tech) in Computer Science & Engineering (2023 - 2027) at Guru Gobind Singh Indraprastha University (GGSIPU), Delhi.
-- Contact: Email: iamansh86@gmail.com | Phone: +91 9899609856 | Location: Delhi, India
-- Links: GitHub: https://github.com/Ansh0864 | LinkedIn: https://www.linkedin.com/in/ansh-chauhan-7848b7314
-
-WORK EXPERIENCE:
-1. Sharnex (07/2026 – Present) — Full-Stack Developer:
-   - Enterprise multi-tenant Next.js platform across Institution, Teacher, and Student portals.
-   - Fees & Online Payments Engine: Razorpay integration, automated IFSC bank account validation, instant GST-compliant digital tax invoice generation, and double-entry ledger bookkeeping.
-   - Core LMS Blueprint: ~7,500 lines of code module enabling teachers to map syllabus blueprints, record lecture logs, and track curriculum coverage.
-   - Live Bus Tracking & Fleet Telemetry: Real-time GPS location streaming via Redis Pub/Sub and Server-Sent Events (SSE) direct to interactive Leaflet/MapLibre maps with sub-second accuracy.
-   - RMS Marks Audit Trail: Secure grading portal with immutable score revision histories and printable student report cards.
-
-2. Mobineers Info Systems (05/2025 – 07/2025) — Software Development Intern:
-   - Built conversational NLP chatbots for workplace administrative query resolution.
-   - Engineered responsive Python Tkinter multi-threaded desktop GUI with async background workers.
-   - Implemented in-memory query caching layers and structured indexed SQLite schemas.
-
-8 LIVE PRODUCTION PROJECTS (ALL DEPLOYED):
-1. CodeArena (https://codearena-murex.vercel.app/): Real-time 1v1 competitive coding platform. Socket.io ELO matchmaking queue, 4 battle modes (Rapid Duel, Bug Hunter, Code Duel, Complexity Duel), Monaco Editor, sandboxed evaluation testbeds supporting Java, C++, and Python with <30ms sync latency.
-2. PageSense Pro / WebPageCB (https://web-page-extension.vercel.app/): AI Chrome Extension (Manifest V3) + FastAPI Agentic RAG. Chunks DOM into 600-char segments, builds in-memory FAISS vector index in RAM, and enables in-page citation highlighting where clicking [Source X] chips scrolls and flash-highlights the cited text on the live page. Includes autonomous DuckDuckGo fallback.
-3. AIInterview Coach (https://ai-interview-steel-psi.vercel.app/): Multi-round mock interview simulator with LangGraph state machine. Zero-downtime multi-provider LLM failover (Groq Llama 3.3-70B primary -> Google Gemini fallback) with per-key cooldown timers, CodeMirror editor with live code validation, Whisper speech transcription, and ElevenLabs voice.
-4. AuraSync (https://aura-sync-1.onrender.com/): Real-time WebRTC emotion recognition system using a custom CNN (FER-2013, sub-80ms CPU latency) classifying 7 micro-expressions and dynamically mapping emotional valence to Spotify ambient soundscapes.
-5. Memeconomy (https://memeconomy-three.vercel.app/): Synthetic social propagation simulator coordinating 50 stateful multi-agents across a directed graph with 2-stage deterministic pre-filtering (70%+ token cost savings) and full content mutation lineage tracking.
-6. HerbTrace (https://herbtrace-1-0vsq.onrender.com/): Ayurvedic herb classification CNN combined with Ethereum Solidity smart contracts via Web3.py for tamper-proof farm-to-consumer traceability.
-7. MarketAgent / QUANT_ARENA (https://market-agent-1-jp5a.onrender.com/): Autonomous financial intelligence RAG with LangChain.js, Polygon.io stock feeds, and Tavily AI web intelligence with zero hallucination.
-8. AI Real Estate Valuation (https://houseprice-uvfqtmyueyznh8ktadx9ng.streamlit.app/): Deep learning housing price regressor (TensorFlow/Keras) with 5-year ROI forecasting and interactive mortgage amortization calculator.
-
-TECHNICAL PHILOSOPHY & ARCHITECTURE:
-- Multi-Provider LLM Failover: Solves single-provider rate limits (Tier-1 TPM/RPM) and outages using primary Groq (Llama 3.3-70B, ~300 tok/s) and secondary Gemini, with in-memory circuit breaker, exponential backoff, and LangGraph state preservation.
-- SSE vs WebSockets: Uses SSE + Redis Pub/Sub for unidirectional high-throughput telemetry (GPS tracking) because it is HTTP-native, passes corporate firewalls, auto-reconnects, and has low memory overhead. Uses Socket.io WebSockets for low-latency bidirectional duels (CodeArena) for keystroke sync and state negotiation.
-- Languages: Python for AI/Agents/RAG, TypeScript/React/Next.js for scalable web interfaces, Java & C++ for core algorithms and systems design.
-
-Tone: Confident, professional, highly technical, articulate, and welcoming. Format with clean markdown, bold terms, bullet points, and include links when referencing projects.`;
+import { Bot, Send, Sparkles, X, RotateCcw, Check } from 'lucide-react';
 
 export default function AiAssistant() {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
-  const [groqKey, setGroqKey] = useState(() => {
-    return localStorage.getItem('groq_api_key') || import.meta.env.VITE_GROQ_API_KEY || '';
-  });
-  const [showKeyModal, setShowKeyModal] = useState(false);
-  const [tempKey, setTempKey] = useState('');
-  const [keySavedMessage, setKeySavedMessage] = useState(false);
 
   const [messages, setMessages] = useState([
     {
@@ -76,23 +31,7 @@ export default function AiAssistant() {
     };
     window.addEventListener('open-ai-chat', handleOpenAi);
     return () => window.removeEventListener('open-ai-chat', handleOpenAi);
-  }, [groqKey]);
-
-  const saveGroqKey = (keyToSave) => {
-    const clean = (keyToSave || '').trim();
-    if (clean) {
-      localStorage.setItem('groq_api_key', clean);
-      setGroqKey(clean);
-    } else {
-      localStorage.removeItem('groq_api_key');
-      setGroqKey('');
-    }
-    setKeySavedMessage(true);
-    setTimeout(() => {
-      setKeySavedMessage(false);
-      setShowKeyModal(false);
-    }, 1200);
-  };
+  }, []);
 
   // Markdown-like text formatter
   const renderFormattedText = (rawText, isUser) => {
@@ -208,18 +147,168 @@ export default function AiAssistant() {
     // ==========================================
     // 0. CONVERSATIONAL GREETINGS & SOCIAL CHIT-CHAT
     // ==========================================
-    const greetings = ['hi', 'hello', 'hey', 'greetings', 'good morning', 'good afternoon', 'good evening', 'sup', 'yo', 'howdy'];
+    const greetings = [
+      'hi', 'hello', 'hey', 'namaste', 'greetings', 'good morning', 
+      'good afternoon', 'good evening', 'sup', 'yo', 'howdy', 'hey there', 
+      'hola', 'whats up', 'what s up', 'welcome'
+    ];
     if (greetings.some(g => q === g || q.startsWith(g + ' ') || q.endsWith(' ' + g) || q === `${g}!` || q === `${g}?`)) {
       return {
-        text: "👋 **Hello! I am Ansh Chauhan's AI Portfolio Copilot & Architecture Assistant.**\n\nI'm here to give you in-depth, technical answers about Ansh's engineering work:\n• **🎯 Best Fit Domains**: Generative AI & Agentic Systems, High-Concurrency Full-Stack, and Real-Time Architectures.\n• **🛠️ Core Tech Stack**: Polyglot proficiency across Python, Next.js, FastAPI, LangGraph, Java, and Redis.\n• **⏱️ Architectural Timeline**: His journey from core CS & algorithms to distributed systems and agentic AI.\n• **🚀 8 Deployed Production Projects**: Live apps spanning real-time WebSockets, in-memory FAISS RAG, and LangGraph multi-agents.\n• **💼 Enterprise Engineering @ Sharnex**: Scaled multi-tenant portals, automated Razorpay invoicing, and live Redis SSE bus tracking.\n\nWhat would you like to explore first?",
-        suggestions: ["🎯 Best Fit Domains", "🛠️ Core Tech Stack", "⏱️ Architectural Timeline", "⭐ Top 3 Projects"]
+        text: "👋 **Hello! Welcome to Ansh Chauhan's Portfolio Intelligence Copilot.**\n\nI'm ready to answer any technical questions about his engineering background:\n• **🎯 Best Fit Domains**: Generative AI & Agentic Systems, High-Concurrency Full-Stack, and Real-Time Systems.\n• **🛠️ Core Tech Stack**: Python, Next.js, FastAPI, LangGraph, Java, C++, and Redis Pub/Sub.\n• **🚀 8 Deployed Production Projects**: Live apps including CodeArena (WebSockets 1v1 duels), PageSense Pro (Agentic RAG Chrome MV3), and AI Interview Coach.\n• **💼 Enterprise Engineering @ Sharnex**: Scaled multi-tenant portals, automated Razorpay financial engine, and real-time Redis SSE GPS fleet telemetry.\n\nWhat would you like to explore first?",
+        suggestions: ["🎯 Best Fit Domains", "🛠️ Core Tech Stack", "🚀 All 8 Projects", "💼 Sharnex Work"]
       };
     }
 
-    if (q.includes('thank') || q.includes('thanks') || q.includes('awesome') || q.includes('great job') || q.includes('cool') || q.includes('impressive') || q.includes('nice work')) {
+    // ==========================================
+    // 0.2 HOW ARE YOU & DAILY WELLNESS
+    // ==========================================
+    if (
+      q.includes('how are you') ||
+      q.includes('how are u') ||
+      q.includes('how r u') ||
+      q.includes('how do you do') ||
+      q.includes('how is it going') ||
+      q.includes('hows it going') ||
+      q.includes('how s it going') ||
+      q.includes('how you doing') ||
+      q.includes('how re you') ||
+      q.includes('whats new') ||
+      q.includes('what s new') ||
+      q.includes('hope you are well') ||
+      q.includes('hope you re well')
+    ) {
       return {
-        text: "⚡ **Glad that was helpful!**\n\nAnsh builds every system with this level of architectural depth and attention to detail. Would you like to inspect another component, check out his **work at Sharnex**, or review his **contact details**?",
+        text: "⚡ **I'm doing fantastic, thank you for asking!**\n\nI'm running with zero latency and ready to help you explore Ansh's portfolio.\n\nWhether you want to inspect his **8 live deployed applications**, review his **production contributions at Sharnex**, or explore his **system designs (multi-LLM failover, Redis SSE, FAISS in-memory RAG)**, I'm here to assist.\n\nHow can I help you today?",
+        suggestions: ["🚀 All 8 Projects", "💼 Sharnex Work", "🛠️ Core Tech Stack", "📫 Contact Ansh"]
+      };
+    }
+
+    // ==========================================
+    // 0.3 GOODBYES, FAREWELLS & PARTING WORDS
+    // ==========================================
+    if (
+      q === 'bye' ||
+      q.startsWith('bye ') ||
+      q.endsWith(' bye') ||
+      q.includes('goodbye') ||
+      q.includes('good bye') ||
+      q.includes('see you') ||
+      q.includes('see ya') ||
+      q.includes('cya') ||
+      q.includes('take care') ||
+      q.includes('have a nice day') ||
+      q.includes('have a good day') ||
+      q.includes('have a great day') ||
+      q.includes('catch you later') ||
+      q.includes('adios') ||
+      q.includes('farewell') ||
+      q.includes('talk later') ||
+      q.includes('later')
+    ) {
+      return {
+        text: "👋 **Thank you for taking the time to explore Ansh Chauhan's portfolio!**\n\nIf you'd like to interview him, discuss an engineering opportunity, or collaborate on a project:\n• **Email**: [iamansh86@gmail.com](mailto:iamansh86@gmail.com)\n• **Phone**: +91 9899609856\n• **LinkedIn**: [linkedin.com/in/ansh-chauhan-7848b7314](https://www.linkedin.com/in/ansh-chauhan-7848b7314)\n• **GitHub**: [github.com/Ansh0864](https://github.com/Ansh0864)\n\nHave a wonderful day ahead!",
+        suggestions: ["📫 Contact Ansh", "⭐ Top 3 Projects", "💼 Sharnex Work"]
+      };
+    }
+
+    // ==========================================
+    // 0.4 GRATITUDE & COMPLIMENTS
+    // ==========================================
+    if (
+      q.includes('thank') ||
+      q.includes('thanks') ||
+      q.includes('thx') ||
+      q.includes('awesome') ||
+      q.includes('great job') ||
+      q.includes('good job') ||
+      q.includes('cool') ||
+      q.includes('impressive') ||
+      q.includes('nice work') ||
+      q.includes('you are smart') ||
+      q.includes('you are cool') ||
+      q.includes('well done') ||
+      q.includes('love this')
+    ) {
+      return {
+        text: "⚡ **Glad that was helpful!**\n\nAnsh engineered every aspect of this portfolio and assistant to reflect high engineering rigor: fast, responsive, transparent, and completely grounded in real systems.\n\nWould you like to inspect his **8 deployed apps**, dive into his **Sharnex work**, or review his **contact information**?",
         suggestions: ["🎯 Best Fit Domains", "🛠️ Core Tech Stack", "💼 Sharnex Work", "📫 Contact Ansh"]
+      };
+    }
+
+    // ==========================================
+    // 0.5 AVAILABILITY, NOTICE PERIOD & JOINING
+    // ==========================================
+    if (
+      q.includes('join') ||
+      q.includes('notice period') ||
+      q.includes('availability') ||
+      q.includes('available') ||
+      q.includes('when can you start') ||
+      q.includes('relocation') ||
+      q.includes('relocate') ||
+      q.includes('remote or onsite') ||
+      q.includes('full time') ||
+      q.includes('internship') ||
+      q.includes('hiring timeline')
+    ) {
+      return {
+        text: "📅 **Ansh Chauhan's Availability & Joining Timeline:**\n\n• **Status**: **Actively Available** for Full-Stack, Generative AI, and Software Engineering roles.\n• **Notice Period**: **Immediate / 0 Days** for internships, high-impact contract positions, and upcoming full-time opportunities.\n• **Graduation**: Class of 2027 (B.Tech Computer Science & Engineering, GGSIPU Delhi).\n• **Work Mode Preference**: Open to **Remote**, **Hybrid**, and **On-site** positions.\n• **Location**: Based in Delhi, India — open to relocation to Bengaluru, Hyderabad, Pune, Mumbai, or global remote roles.\n• **Direct Contact**: Reach out directly at [iamansh86@gmail.com](mailto:iamansh86@gmail.com) or call +91 9899609856!",
+        suggestions: ["📫 Contact Ansh", "🎯 Best Fit Domains", "💼 Sharnex Work", "🛠️ Core Tech Stack"]
+      };
+    }
+
+    // ==========================================
+    // 0.6 DSA, LEETCODE & PROBLEM SOLVING
+    // ==========================================
+    if (
+      q.includes('dsa') ||
+      q.includes('leetcode') ||
+      q.includes('algorithm') ||
+      q.includes('data structure') ||
+      q.includes('problem solving') ||
+      q.includes('competitive programming') ||
+      q.includes('codeforces') ||
+      q.includes('hackerrank')
+    ) {
+      return {
+        text: "🧠 **Algorithmic Foundation & Problem Solving (DSA):**\n\nAnsh combines strong computer science theory with real-world systems engineering:\n• **Core Languages**: High proficiency in **Java** and **C++** for core algorithms, memory management, and object-oriented design.\n• **Key Concepts Mastered**: Graph traversal (BFS/DFS, Topological Sort), Dynamic Programming, Trees, Heaps, and Concurrency.\n• **Applied Systems Rigor**:\n  - In [LangGraph](https://ai-interview-steel-psi.vercel.app/) and [Memeconomy](https://memeconomy-three.vercel.app/), he models agent state transitions as directed cyclic graphs.\n  - In [PageSense Pro](https://web-page-extension.vercel.app/), he leverages high-dimensional vector math and RAM indexing via FAISS (<10ms lookup).\n  - In [CodeArena](https://codearena-murex.vercel.app/), he built an automated sandboxed multi-language testcase evaluation engine supporting Java, C++, and Python.",
+        suggestions: ["🛠️ Core Tech Stack", "🚀 All 8 Projects", "⏱️ Architectural Timeline"]
+      };
+    }
+
+    // ==========================================
+    // 0.7 DEVOPS, TESTING & CODE QUALITY
+    // ==========================================
+    if (
+      q.includes('devops') ||
+      q.includes('docker') ||
+      q.includes('ci/cd') ||
+      q.includes('testing') ||
+      q.includes('unit test') ||
+      q.includes('code quality') ||
+      q.includes('deployment') ||
+      q.includes('linux')
+    ) {
+      return {
+        text: "🛡️ **Engineering Standards, Testing & DevOps:**\n\n• **Containerization**: Dockerized microservices and reproducible isolated runtimes.\n• **Continuous Deployment**: Automated CI/CD pipelines deploying to Vercel and Render with zero downtime.\n• **Code Architecture**: Strict modular component hierarchy, TypeScript/Python type safety, and clean separation between presentation, state, and telemetry.\n• **Fault Tolerance**: Engineered multi-provider LLM failovers with in-memory circuit breakers, exponential backoff retries, and LangGraph checkpoint state preservation.",
+        suggestions: ["🔄 Multi-LLM Failover", "💼 Sharnex Work", "🚀 All 8 Projects"]
+      };
+    }
+
+    // ==========================================
+    // 0.8 SALARY & COMPENSATION
+    // ==========================================
+    if (
+      q.includes('salary') ||
+      q.includes('ctc') ||
+      q.includes('compensation') ||
+      q.includes('stipend') ||
+      q.includes('expected salary') ||
+      q.includes('package')
+    ) {
+      return {
+        text: "💼 **Compensation & Opportunities:**\n\nAnsh prioritizes **engineering impact, ownership, problem complexity, and team velocity** over rigid salary figures.\n\nHis expectations are flexible and aligned with standard competitive industry benchmarks for top-tier junior/intern engineering roles. He welcomes conversations tailored to the scope and scale of the role.\n\n• **Email**: [iamansh86@gmail.com](mailto:iamansh86@gmail.com)\n• **Phone**: +91 9899609856\n• **LinkedIn**: [linkedin.com/in/ansh-chauhan-7848b7314](https://www.linkedin.com/in/ansh-chauhan-7848b7314)",
+        suggestions: ["📫 Contact Ansh", "🎯 Best Fit Domains", "💼 Sharnex Work"]
       };
     }
 
@@ -799,8 +888,8 @@ export default function AiAssistant() {
     };
   };
 
-  // Main message sender with Groq LPU support + Fallback
-  const handleSend = async (userText) => {
+  // Main message sender using Instant Architecture Knowledge Engine
+  const handleSend = (userText) => {
     const query = (userText || input).trim();
     if (!query || isTyping) return;
 
@@ -831,83 +920,12 @@ export default function AiAssistant() {
       }
     ]);
 
-    // Check if Groq API key is available
-    if (groqKey) {
-      try {
-        const historyForGroq = messages.slice(-4).map(m => ({
-          role: m.sender === 'user' ? 'user' : 'assistant',
-          content: m.text
-        }));
-
-        const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${groqKey}`
-          },
-          body: JSON.stringify({
-            model: 'llama-3.3-70b-versatile',
-            messages: [
-              { role: 'system', content: SYSTEM_PROMPT },
-              ...historyForGroq,
-              { role: 'user', content: query }
-            ],
-            temperature: 0.6,
-            max_tokens: 1024
-          })
-        });
-
-        if (!response.ok) {
-          throw new Error(`Groq API returned ${response.status}`);
-        }
-
-        const data = await response.json();
-        const groqText = data.choices?.[0]?.message?.content;
-
-        if (groqText) {
-          // Stream Groq response smoothly
-          let charIndex = 0;
-          const streamStep = () => {
-            charIndex += 14;
-            if (charIndex >= groqText.length) {
-              setMessages(prev =>
-                prev.map(m =>
-                  m.id === aiMessageId
-                    ? {
-                        ...m,
-                        text: groqText,
-                        suggestions: ["🚀 All 8 Projects", "🔄 Multi-LLM Failover", "💼 Sharnex Work", "📫 Contact Ansh"],
-                        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-                      }
-                    : m
-                )
-              );
-              setIsTyping(false);
-            } else {
-              setMessages(prev =>
-                prev.map(m =>
-                  m.id === aiMessageId
-                    ? { ...m, text: groqText.slice(0, charIndex) }
-                    : m
-                )
-              );
-              timerRef.current = setTimeout(streamStep, 10);
-            }
-          };
-          timerRef.current = setTimeout(streamStep, 50);
-          return;
-        }
-      } catch (err) {
-        console.warn('Groq API call failed, falling back to enhanced local knowledge base:', err);
-      }
-    }
-
-    // High-Efficiency Local Knowledge Engine Fallback
+    // High-Efficiency Instant Knowledge Engine
     const { text: fullResponse, suggestions } = getKnowledgeResponse(query);
 
     let charIndex = 0;
     const streamStep = () => {
-      charIndex += 12;
+      charIndex += 14;
       if (charIndex >= fullResponse.length) {
         setMessages(prev =>
           prev.map(m =>
@@ -934,7 +952,7 @@ export default function AiAssistant() {
       }
     };
 
-    timerRef.current = setTimeout(streamStep, 80);
+    timerRef.current = setTimeout(streamStep, 60);
   };
 
   const handleReset = () => {
@@ -987,33 +1005,18 @@ export default function AiAssistant() {
               <div>
                 <h4 className="text-xs font-bold text-zinc-900 flex items-center gap-1.5">
                   Ansh's Portfolio Copilot
-                  <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono font-semibold ${
-                    groqKey ? 'bg-indigo-100 text-indigo-700' : 'bg-emerald-100 text-emerald-700'
-                  }`}>
-                    {groqKey ? 'Groq LPU' : 'Online'}
+                  <span className="inline-flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full font-medium bg-emerald-50 text-emerald-700 border border-emerald-200">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                    Online
                   </span>
                 </h4>
                 <p className="text-[10px] text-zinc-500">
-                  {groqKey ? 'Powered by Groq (Llama 3.3-70B)' : 'High-Efficiency Architecture Copilot'}
+                  Technical Architecture & Systems Intelligence
                 </p>
               </div>
             </div>
             
             <div className="flex items-center gap-1">
-              {/* Optional Groq API Key Setup */}
-              <button
-                onClick={() => {
-                  setTempKey(groqKey);
-                  setShowKeyModal(!showKeyModal);
-                }}
-                className={`p-1.5 rounded-lg transition-colors cursor-pointer ${
-                  groqKey ? 'text-indigo-600 bg-indigo-50 hover:bg-indigo-100' : 'text-zinc-400 hover:text-zinc-700 hover:bg-zinc-100'
-                }`}
-                title="Groq API Key (Optional)"
-              >
-                <Key size={14} />
-              </button>
-
               <button
                 onClick={handleReset}
                 className="p-1.5 rounded-lg text-zinc-400 hover:text-zinc-700 hover:bg-zinc-100 transition-colors cursor-pointer"
@@ -1031,41 +1034,6 @@ export default function AiAssistant() {
               </button>
             </div>
           </div>
-
-          {/* Key Settings Modal / Popover */}
-          {showKeyModal && (
-            <div className="p-3.5 bg-zinc-50 border-b border-zinc-200 text-xs animate-fade-in">
-              <div className="flex items-center justify-between mb-1.5">
-                <span className="font-bold text-zinc-900 flex items-center gap-1.5">
-                  <Key size={12} className="text-indigo-600" /> Groq API Key (Optional)
-                </span>
-                <span className="text-[10px] text-zinc-400">Stored locally</span>
-              </div>
-              <p className="text-[11px] text-zinc-500 mb-2">
-                Connect your Groq key for live Llama 3.3-70B inference, or leave blank to use the built-in offline intelligence engine.
-              </p>
-              <div className="flex items-center gap-2">
-                <input
-                  type="password"
-                  value={tempKey}
-                  onChange={(e) => setTempKey(e.target.value)}
-                  placeholder="gsk_..."
-                  className="flex-1 px-2.5 py-1.5 text-xs bg-white border border-zinc-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 font-mono"
-                />
-                <button
-                  onClick={() => saveGroqKey(tempKey)}
-                  className="px-3 py-1.5 bg-zinc-900 hover:bg-zinc-800 text-white font-semibold rounded-lg text-xs cursor-pointer shadow-xs"
-                >
-                  Save
-                </button>
-              </div>
-              {keySavedMessage && (
-                <div className="mt-2 text-[11px] text-emerald-600 font-semibold flex items-center gap-1">
-                  <Check size={12} /> Key updated successfully!
-                </div>
-              )}
-            </div>
-          )}
 
           {/* Quick Query Pills */}
           <div className="p-2 bg-zinc-50 border-b border-zinc-200 overflow-x-auto flex gap-1.5 scrollbar-none">
@@ -1134,7 +1102,7 @@ export default function AiAssistant() {
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder={groqKey ? "Ask with Groq Llama 3.3-70B..." : "Ask about projects, failover, Sharnex, Java..."}
+              placeholder="Ask about projects, architecture, Sharnex, skills..."
               className="flex-1 px-3 py-2 text-xs bg-zinc-50 border border-zinc-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 text-zinc-900 placeholder-zinc-400"
             />
             <button
