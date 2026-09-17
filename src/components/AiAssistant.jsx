@@ -980,21 +980,21 @@ export default function AiAssistant() {
   }, []);
 
   return (
-    <div className="fixed bottom-4 left-4 sm:bottom-6 sm:left-6 z-40 max-w-[calc(100vw-2rem)]">
+    <div className="fixed bottom-3 left-3 right-3 sm:right-auto sm:bottom-6 sm:left-6 z-40">
       {!isOpen ? (
         <button
           onClick={() => setIsOpen(true)}
-          className="flex items-center gap-2.5 px-4 py-3 rounded-full bg-zinc-900 hover:bg-zinc-800 text-white shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 group cursor-pointer border border-zinc-700"
+          className="flex items-center gap-2 px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-full bg-zinc-900 hover:bg-zinc-800 text-white shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 group cursor-pointer border border-zinc-700"
           title="Open AI Portfolio Copilot"
         >
           <div className="relative">
-            <Bot size={18} />
+            <Bot size={17} />
             <span className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
           </div>
           <span className="text-xs font-bold tracking-wide">Ask Ansh's AI</span>
         </button>
       ) : (
-        <div className="w-[calc(100vw-2rem)] sm:w-[410px] h-[540px] max-h-[85vh] rounded-2xl bg-white border border-zinc-200 shadow-2xl flex flex-col overflow-hidden animate-fade-in relative">
+        <div className="w-full sm:w-[410px] h-[520px] max-h-[82vh] rounded-2xl bg-white border border-zinc-200 shadow-2xl flex flex-col overflow-hidden animate-fade-in relative">
           
           {/* Header */}
           <div className="p-3.5 bg-white border-b border-zinc-200 flex items-center justify-between">

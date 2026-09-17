@@ -22,14 +22,14 @@ export default function Education() {
         </div>
 
         {/* Education Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
           {education.map((item, idx) => (
             <div
               key={idx}
-              className="glass-card glass-card-hover rounded-2xl p-6 sm:p-7 border border-zinc-200 dark:border-zinc-800 shadow-sm flex flex-col justify-between"
+              className="glass-card glass-card-hover rounded-2xl p-4 sm:p-7 border border-zinc-200 shadow-sm flex flex-col justify-between"
             >
               <div>
-                <div className="flex items-center justify-between text-xs font-medium text-zinc-500 dark:text-zinc-400 mb-3">
+                <div className="flex items-center justify-between text-xs font-medium text-zinc-500 mb-3">
                   <span className="inline-flex items-center gap-1">
                     <Calendar size={13} className="text-zinc-400" />
                     {item.period}
@@ -40,20 +40,20 @@ export default function Education() {
                   </span>
                 </div>
 
-                <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-1">
+                <h3 className="text-lg sm:text-xl font-bold text-zinc-900 mb-1">
                   {item.degree}
                 </h3>
-                <p className="text-sm font-semibold text-sky-600 dark:text-indigo-400 mb-4">
+                <p className="text-xs sm:text-sm font-semibold text-sky-600 mb-4">
                   {item.institution}
                 </p>
 
-                <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed">
+                <p className="text-xs sm:text-sm text-zinc-600 leading-relaxed">
                   {item.details}
                 </p>
               </div>
 
-              <div className="pt-4 mt-6 border-t border-zinc-100 dark:border-zinc-800 flex items-center gap-2 text-xs text-zinc-500 dark:text-zinc-400 font-medium">
-                <Award size={14} className="text-emerald-500 dark:text-emerald-400" />
+              <div className="pt-4 mt-6 border-t border-zinc-100 flex items-center gap-2 text-xs text-zinc-500 font-medium">
+                <Award size={14} className="text-emerald-500" />
                 <span>Verified Academic Credential</span>
               </div>
             </div>

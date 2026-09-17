@@ -113,15 +113,17 @@ export default function InteractiveTerminal() {
           <div className="absolute -bottom-24 -left-24 w-72 h-72 bg-emerald-600/10 blur-3xl rounded-full pointer-events-none" />
 
           {/* Window Header */}
-          <div className="flex items-center justify-between px-4 py-3 bg-[#0d121f] border-b border-zinc-800/80 relative z-10">
-            <div className="flex items-center gap-2">
-              <span className="w-3 h-3 rounded-full bg-rose-500 border border-rose-600/30 inline-block"></span>
-              <span className="w-3 h-3 rounded-full bg-amber-500 border border-amber-600/30 inline-block"></span>
-              <span className="w-3 h-3 rounded-full bg-emerald-500 border border-emerald-600/30 inline-block"></span>
-              <span className="text-xs text-zinc-300 font-sans ml-2 font-semibold">ansh@developer-workstation: ~/portfolio (zsh)</span>
+          <div className="flex items-center justify-between px-3 sm:px-4 py-3 bg-[#0d121f] border-b border-zinc-800/80 relative z-10">
+            <div className="flex items-center gap-1.5 sm:gap-2 overflow-hidden">
+              <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-rose-500 border border-rose-600/30 shrink-0 inline-block"></span>
+              <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-amber-500 border border-amber-600/30 shrink-0 inline-block"></span>
+              <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-emerald-500 border border-emerald-600/30 shrink-0 inline-block"></span>
+              <span className="text-[11px] sm:text-xs text-zinc-300 font-sans ml-1 sm:ml-2 font-semibold truncate max-w-[140px] sm:max-w-none">
+                ansh@workstation: ~/portfolio
+              </span>
             </div>
-            <div className="flex items-center gap-2 text-zinc-400 text-xs font-sans">
-              <span className="inline-flex items-center gap-1.5 text-[11px] bg-zinc-900/90 border border-zinc-800 text-emerald-400 px-2.5 py-0.5 rounded-full font-medium">
+            <div className="flex items-center gap-2 text-zinc-400 text-xs font-sans shrink-0">
+              <span className="inline-flex items-center gap-1.5 text-[10px] sm:text-[11px] bg-zinc-900/90 border border-zinc-800 text-emerald-400 px-2 sm:px-2.5 py-0.5 rounded-full font-medium">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
                 live console
               </span>
@@ -129,7 +131,7 @@ export default function InteractiveTerminal() {
           </div>
 
           {/* Quick Shortcuts Bar */}
-          <div className="px-4 py-2.5 bg-[#0b0f19] border-b border-zinc-800/80 flex items-center gap-1.5 overflow-x-auto scrollbar-none relative z-10">
+          <div className="px-3 sm:px-4 py-2 bg-[#0b0f19] border-b border-zinc-800/80 flex items-center gap-1.5 overflow-x-auto scrollbar-none relative z-10">
             <span className="text-[11px] text-zinc-400 font-sans mr-1 font-medium whitespace-nowrap">Quick clicks:</span>
             {quickPills.map((pill) => (
               <button
@@ -139,7 +141,7 @@ export default function InteractiveTerminal() {
                   e.stopPropagation();
                   handleCommand(pill.label);
                 }}
-                className="px-2.5 py-1 rounded-md bg-zinc-900 hover:bg-indigo-950 text-zinc-300 hover:text-indigo-300 border border-zinc-800 hover:border-indigo-600/70 text-xs transition-all shrink-0 font-medium cursor-pointer shadow-xs"
+                className="px-2 sm:px-2.5 py-1 rounded-md bg-zinc-900 hover:bg-indigo-950 text-zinc-300 hover:text-indigo-300 border border-zinc-800 hover:border-indigo-600/70 text-xs transition-all shrink-0 font-medium cursor-pointer shadow-xs"
               >
                 {pill.label}
               </button>
@@ -149,7 +151,7 @@ export default function InteractiveTerminal() {
           {/* Output log */}
           <div 
             ref={logContainerRef}
-            className="p-5 max-h-80 overflow-y-auto space-y-4 bg-[#07090e] select-text relative z-10 scroll-smooth"
+            className="p-3.5 sm:p-5 max-h-80 overflow-y-auto space-y-4 bg-[#07090e] select-text relative z-10 scroll-smooth"
           >
             {history.map((item, idx) => (
               <div key={idx} className="space-y-1.5">
@@ -158,7 +160,7 @@ export default function InteractiveTerminal() {
                   <span className="text-indigo-400 font-semibold">~</span>
                   <span className="text-white font-bold">{item.command}</span>
                 </div>
-                <div className="text-zinc-300 whitespace-pre-wrap pl-4 font-mono leading-relaxed text-xs sm:text-sm bg-zinc-950/70 p-3 rounded-xl border border-zinc-800/70">
+                <div className="text-zinc-300 whitespace-pre-wrap pl-3 sm:pl-4 font-mono leading-relaxed text-xs sm:text-sm bg-zinc-950/70 p-3 rounded-xl border border-zinc-800/70">
                   {item.output}
                 </div>
               </div>
@@ -169,7 +171,7 @@ export default function InteractiveTerminal() {
           {/* Command Prompt Input */}
           <form 
             onSubmit={handleSubmit} 
-            className="flex items-center gap-2 px-4 py-3 bg-[#0d121f] border-t border-zinc-800/80 relative z-10"
+            className="flex items-center gap-2 px-3 sm:px-4 py-2.5 sm:py-3 bg-[#0d121f] border-t border-zinc-800/80 relative z-10"
           >
             <span className="text-emerald-400 font-bold text-sm">➜</span>
             <span className="text-indigo-400 font-semibold text-sm">~</span>
@@ -178,8 +180,8 @@ export default function InteractiveTerminal() {
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Type a command ('projects', 'skills', 'about', 'clear') or press Enter..."
-              className="flex-1 bg-transparent border-none text-emerald-300 focus:outline-none placeholder:text-zinc-600 text-xs sm:text-sm font-mono"
+              placeholder="Type command ('help', 'projects', 'skills')..."
+              className="flex-1 bg-transparent border-none text-emerald-300 focus:outline-none placeholder:text-zinc-600 text-xs sm:text-sm font-mono min-w-0"
             />
             <button
               type="submit"

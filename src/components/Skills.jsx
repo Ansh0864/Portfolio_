@@ -452,12 +452,12 @@ export default function Skills({ onSkillClick, onSelectProject }) {
         </div>
 
         {/* Category Filter Tabs */}
-        <div className="flex flex-wrap items-center gap-2 mb-8 pb-2 border-b border-zinc-100">
+        <div className="flex items-center gap-1.5 sm:gap-2 mb-6 sm:mb-8 pb-2 border-b border-zinc-100 overflow-x-auto scrollbar-none">
           {categoryTabs.map(tab => (
             <button
               key={tab.id}
               onClick={() => handleCategoryTabClick(tab.id)}
-              className={`px-3.5 py-2 rounded-xl text-xs font-semibold transition-all duration-200 cursor-pointer flex items-center gap-1.5 ${
+              className={`px-3 sm:px-3.5 py-1.5 sm:py-2 rounded-xl text-xs font-semibold transition-all duration-200 cursor-pointer flex items-center gap-1.5 whitespace-nowrap shrink-0 ${
                 selectedCategoryTab === tab.id
                   ? 'bg-zinc-900 text-white shadow-sm scale-102'
                   : 'bg-zinc-50 hover:bg-zinc-100 text-zinc-600 border border-zinc-200/80'
@@ -476,11 +476,11 @@ export default function Skills({ onSkillClick, onSelectProject }) {
         </div>
 
         {/* Main Grid: Interactive Skill Matrix + Dynamic Live Inspector HUD */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-start">
           
           {/* Left: Interactive Skill Pills Grid (7 Cols) */}
           <div className="lg:col-span-7 space-y-6">
-            <div className="glass-card rounded-2xl p-5 sm:p-6 border border-zinc-200 shadow-sm">
+            <div className="glass-card rounded-2xl p-4 sm:p-6 border border-zinc-200 shadow-sm">
               <div className="flex items-center justify-between mb-4 pb-3 border-b border-zinc-100">
                 <span className="text-xs font-semibold text-zinc-500 uppercase tracking-wider flex items-center gap-1.5">
                   <Zap size={13} className="text-amber-500" />
@@ -550,7 +550,7 @@ export default function Skills({ onSkillClick, onSelectProject }) {
 
           {/* Right: Dynamic Live Inspector HUD Panel (5 Cols, Static) */}
           <div ref={inspectorRef} className="lg:col-span-5">
-            <div className="glass-card rounded-2xl p-6 sm:p-7 border border-zinc-200 shadow-md relative overflow-hidden bg-white">
+            <div className="glass-card rounded-2xl p-4 sm:p-7 border border-zinc-200 shadow-md relative overflow-hidden bg-white">
               
               {/* Header Badge & Level */}
               <div className="flex items-center justify-between mb-4">

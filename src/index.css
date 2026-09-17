@@ -5,15 +5,25 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    overflow-x: clip;
+    overflow-x: hidden;
+    max-width: 100%;
+    -webkit-text-size-adjust: 100%;
   }
   
   /* PURE CRISP WHITE LIGHT THEME */
   body {
     background-color: #ffffff;
     color: #09090b;
-    overflow-x: clip;
+    overflow-x: hidden;
+    max-width: 100%;
+    -webkit-overflow-scrolling: touch;
     transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  #root {
+    overflow-x: hidden;
+    max-width: 100%;
+    min-height: 100vh;
   }
 
   /* Custom scrollbar */

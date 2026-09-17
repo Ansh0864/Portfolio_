@@ -153,26 +153,26 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-24 border-t border-zinc-200 bg-white transition-colors duration-300">
+    <section id="contact" className="py-16 sm:py-24 border-t border-zinc-200 bg-white transition-colors duration-300">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
-        <div className="max-w-2xl mb-14">
+        <div className="max-w-2xl mb-10 sm:mb-14">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-semibold uppercase tracking-wider mb-3">
             <Sparkles size={12} /> Direct Contact Channel
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-zinc-900 tracking-tight">
+          <h2 className="text-2xl sm:text-4xl font-extrabold text-zinc-900 tracking-tight">
             Let's Build Something Exceptional Together
           </h2>
-          <p className="text-sm sm:text-base text-zinc-600 mt-3 leading-relaxed">
+          <p className="text-xs sm:text-base text-zinc-600 mt-2 sm:mt-3 leading-relaxed">
             Send a direct message below or email me directly at <a href={`mailto:${personalInfo.email}`} className="text-indigo-600 font-semibold underline">{personalInfo.email}</a>.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8">
           {/* Left Column: Direct Info & Quick Copy */}
           <div className="lg:col-span-5 space-y-4">
             {/* Email Card */}
-            <div className="glass-card rounded-2xl p-6 border border-zinc-200 shadow-sm flex items-start justify-between gap-4">
+            <div className="glass-card rounded-2xl p-4 sm:p-6 border border-zinc-200 shadow-sm flex items-start justify-between gap-3 sm:gap-4">
               <div className="flex items-start gap-3.5">
                 <div className="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0 border border-indigo-100">
                   <Mail size={18} />
@@ -266,7 +266,7 @@ export default function Contact() {
 
           {/* Right Column: Contact Message Form */}
           <div className="lg:col-span-7">
-            <div className="glass-card rounded-2xl p-7 sm:p-8 border border-zinc-200 shadow-sm">
+            <div className="glass-card rounded-2xl p-4 sm:p-8 border border-zinc-200 shadow-sm">
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-2 text-xs font-semibold text-zinc-500 uppercase tracking-wider">
                   <MessageSquare size={15} className="text-sky-600" />

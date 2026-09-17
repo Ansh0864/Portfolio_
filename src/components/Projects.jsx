@@ -224,7 +224,7 @@ export default function Projects({ onSelectProject, activeSkillFilter, onClearSk
               </div>
 
               {/* Card Body */}
-              <div className="p-6 sm:p-7 flex-1 flex flex-col justify-between">
+              <div className="p-4 sm:p-7 flex-1 flex flex-col justify-between">
                 <div>
                   {/* Title & Subtitle */}
                   <h3 className="text-xl sm:text-2xl font-bold text-zinc-900 group-hover:text-sky-600 transition-colors mb-1.5">
@@ -275,21 +275,21 @@ export default function Projects({ onSelectProject, activeSkillFilter, onClearSk
                   <div className="flex items-center gap-2 pt-2">
                     <button
                       onClick={() => onSelectProject(project)}
-                      className="flex-1 inline-flex items-center justify-center gap-1.5 py-2.5 px-3 text-xs font-semibold text-zinc-800 bg-zinc-100 hover:bg-zinc-200 rounded-xl transition-all border border-zinc-200 cursor-pointer"
+                      className="flex-1 inline-flex items-center justify-center gap-1.5 py-2.5 px-2 sm:px-3 text-[11px] sm:text-xs font-semibold text-zinc-800 bg-zinc-100 hover:bg-zinc-200 rounded-xl transition-all border border-zinc-200 cursor-pointer"
                     >
-                      <Eye size={14} className="text-sky-600" />
-                      <span>Architecture & Specs</span>
+                      <Eye size={13} className="text-sky-600 shrink-0" />
+                      <span className="truncate">Architecture</span>
                     </button>
 
                     <a
                       href={project.demoLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center gap-1.5 py-2.5 px-4 text-xs font-semibold text-white bg-zinc-900 hover:bg-zinc-800 rounded-xl transition-all shadow-sm hover:shadow group/btn"
+                      className="inline-flex items-center justify-center gap-1.5 py-2.5 px-3 sm:px-4 text-[11px] sm:text-xs font-semibold text-white bg-zinc-900 hover:bg-zinc-800 rounded-xl transition-all shadow-sm hover:shadow group/btn shrink-0"
                       title="Open Live Deployment"
                     >
                       <span>Live Demo</span>
-                      <ArrowUpRight size={14} className="group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
+                      <ArrowUpRight size={13} className="group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform shrink-0" />
                     </a>
                   </div>
                 </div>
