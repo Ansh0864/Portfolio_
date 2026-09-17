@@ -980,7 +980,7 @@ export default function AiAssistant() {
   }, []);
 
   return (
-    <div className="fixed bottom-3 left-3 right-3 sm:right-auto sm:bottom-6 sm:left-6 z-40">
+    <div className={isOpen ? "fixed bottom-3 left-3 right-3 sm:right-auto sm:bottom-6 sm:left-6 sm:w-[410px] z-40" : "fixed bottom-4 left-4 sm:bottom-6 sm:left-6 z-40"}>
       {!isOpen ? (
         <button
           onClick={() => setIsOpen(true)}
@@ -994,7 +994,7 @@ export default function AiAssistant() {
           <span className="text-xs font-bold tracking-wide">Ask Ansh's AI</span>
         </button>
       ) : (
-        <div className="w-full sm:w-[410px] h-[520px] max-h-[82vh] rounded-2xl bg-white border border-zinc-200 shadow-2xl flex flex-col overflow-hidden animate-fade-in relative">
+        <div className="w-full h-[520px] max-h-[82vh] rounded-2xl bg-white border border-zinc-200 shadow-2xl flex flex-col overflow-hidden animate-fade-in relative">
           
           {/* Header */}
           <div className="p-3.5 bg-white border-b border-zinc-200 flex items-center justify-between">

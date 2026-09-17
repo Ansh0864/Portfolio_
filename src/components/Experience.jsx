@@ -5,12 +5,12 @@ export default function Experience() {
   return (
     <section 
       id="experience" 
-      className="relative z-10 bg-white rounded-t-[28px] sm:rounded-t-[48px] shadow-[0_-20px_50px_rgba(0,0,0,0.08)] sm:shadow-[0_-30px_70px_rgba(0,0,0,0.12)] border-t border-zinc-200/80 py-16 sm:py-20 md:py-28 transition-colors duration-300 overflow-hidden"
+      className="relative z-10 bg-white rounded-t-[28px] sm:rounded-t-[48px] shadow-[0_-20px_50px_rgba(0,0,0,0.08)] sm:shadow-[0_-30px_70px_rgba(0,0,0,0.12)] border-t border-zinc-200/80 py-12 sm:py-20 md:py-28 transition-colors duration-300 w-full max-w-full overflow-hidden"
     >
-      {/* Giant Hollow Outline Watermark Heading Text (matching reference) */}
+      {/* Giant Hollow Outline Watermark Heading Text (Desktop/Tablet only) */}
       <div 
         aria-hidden="true"
-        className="absolute top-4 sm:top-8 md:top-10 left-1/2 -translate-x-1/2 w-full max-w-full select-none text-center font-black tracking-widest text-transparent uppercase pointer-events-none text-4xl sm:text-7xl md:text-9xl lg:text-[145px] leading-none opacity-20 z-0 overflow-hidden"
+        className="hidden sm:block absolute top-6 sm:top-8 md:top-10 left-1/2 -translate-x-1/2 w-full max-w-full select-none text-center font-black tracking-widest text-transparent uppercase pointer-events-none sm:text-7xl md:text-9xl lg:text-[145px] leading-none opacity-20 z-0 overflow-hidden"
         style={{ 
           WebkitTextStroke: '1.5px rgba(212, 212, 216, 0.9)',
           letterSpacing: '0.12em'
@@ -19,11 +19,11 @@ export default function Experience() {
         EXPERIENCE
       </div>
 
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 relative z-10">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 relative z-10 min-w-0">
         
         {/* Section Header */}
-        <div className="mb-10 sm:mb-16">
-          <div className="inline-flex items-center px-3.5 py-1 rounded-full bg-zinc-100 border border-zinc-200 text-zinc-800 text-xs font-bold uppercase tracking-wider mb-3 shadow-2xs">
+        <div className="mb-8 sm:mb-16">
+          <div className="inline-flex items-center px-3.5 py-1 rounded-full bg-zinc-100 border border-zinc-200 text-zinc-800 text-xs font-bold uppercase tracking-wider mb-2.5 shadow-2xs">
             Work History
           </div>
           
@@ -37,24 +37,24 @@ export default function Experience() {
         </div>
 
         {/* Both Boxes Fixed In Place — Unchanged Deliverables & Stacks */}
-        <div className="space-y-6 sm:space-y-8 relative before:absolute before:inset-0 before:left-4 md:before:left-1/2 md:before:-translate-x-1/2 before:w-0.5 before:bg-zinc-200 before:hidden sm:before:block">
+        <div className="space-y-5 sm:space-y-8 relative before:absolute before:inset-0 before:left-4 md:before:left-1/2 md:before:-translate-x-1/2 before:w-0.5 before:bg-zinc-200 before:hidden sm:before:block">
           {experience.map((exp, idx) => (
             <div
               key={idx}
-              className="relative glass-card glass-card-hover rounded-2xl p-5 sm:p-8 md:p-9 border border-zinc-200/80 shadow-card bg-white"
+              className="relative glass-card glass-card-hover rounded-2xl p-4 sm:p-8 md:p-9 border border-zinc-200/80 shadow-card bg-white"
             >
               {/* Header row */}
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 mb-4 border-b border-zinc-100">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-3 pb-3 sm:pb-4 mb-3 sm:mb-4 border-b border-zinc-100">
                 <div>
-                  <div className="flex items-center gap-2 flex-wrap">
-                    <h3 className="text-xl sm:text-2xl font-bold text-zinc-900 tracking-tight">
+                  <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+                    <h3 className="text-lg sm:text-2xl font-bold text-zinc-900 tracking-tight">
                       {exp.role}
                     </h3>
                     <span className="text-zinc-400 font-normal">@</span>
-                    <span className="text-lg sm:text-xl font-bold text-sky-600">
+                    <span className="text-base sm:text-xl font-bold text-sky-600">
                       {exp.company}
                     </span>
-                    <span className="text-xs px-2.5 py-0.5 rounded-full bg-zinc-100 text-zinc-700 font-medium border border-zinc-200">
+                    <span className="text-[11px] sm:text-xs px-2 sm:px-2.5 py-0.5 rounded-full bg-zinc-100 text-zinc-700 font-medium border border-zinc-200">
                       {exp.type}
                     </span>
                   </div>

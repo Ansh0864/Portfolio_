@@ -88,17 +88,17 @@ export default function InteractiveTerminal() {
   ];
 
   return (
-    <section id="terminal" className="py-20 border-t border-zinc-200 bg-white transition-colors duration-300">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6">
+    <section id="terminal" className="py-14 sm:py-20 border-t border-zinc-200 bg-white transition-colors duration-300 w-full max-w-full overflow-hidden">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 min-w-0">
         {/* Header */}
-        <div className="text-center mb-8">
+        <div className="text-center mb-6 sm:mb-8">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-zinc-900 text-zinc-200 text-xs font-semibold uppercase tracking-wider mb-2 shadow-xs">
             <TerminalIcon size={12} className="text-emerald-400" /> Interactive CLI Playground
           </div>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-zinc-900 tracking-tight">
             Developer Console
           </h2>
-          <p className="text-xs sm:text-sm text-zinc-500 mt-1">
+          <p className="text-xs sm:text-sm text-zinc-500 mt-1 max-w-md mx-auto">
             Query Ansh's background, system designs, and production records in an authentic terminal environment.
           </p>
         </div>
@@ -106,11 +106,11 @@ export default function InteractiveTerminal() {
         {/* Console Container - High-Tech Black Box */}
         <div 
           onClick={() => inputRef.current?.focus()}
-          className="bg-[#090c15] rounded-2xl border border-zinc-800 shadow-2xl overflow-hidden font-mono text-xs sm:text-sm cursor-text relative"
+          className="bg-[#090c15] rounded-2xl border border-zinc-800 shadow-2xl overflow-hidden font-mono text-xs sm:text-sm cursor-text relative w-full max-w-full min-w-0"
         >
-          {/* Subtle Ambient Backlight Glow */}
-          <div className="absolute -top-24 -right-24 w-72 h-72 bg-indigo-600/10 blur-3xl rounded-full pointer-events-none" />
-          <div className="absolute -bottom-24 -left-24 w-72 h-72 bg-emerald-600/10 blur-3xl rounded-full pointer-events-none" />
+          {/* Subtle Ambient Backlight Glow (Desktop) */}
+          <div className="hidden sm:block absolute -top-24 -right-24 w-72 h-72 bg-indigo-600/10 blur-3xl rounded-full pointer-events-none" />
+          <div className="hidden sm:block absolute -bottom-24 -left-24 w-72 h-72 bg-emerald-600/10 blur-3xl rounded-full pointer-events-none" />
 
           {/* Window Header */}
           <div className="flex items-center justify-between px-3 sm:px-4 py-3 bg-[#0d121f] border-b border-zinc-800/80 relative z-10">

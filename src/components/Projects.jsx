@@ -103,19 +103,19 @@ export default function Projects({ onSelectProject, activeSkillFilter, onClearSk
   });
 
   return (
-    <section id="projects" className="py-24 border-t border-zinc-200 bg-white transition-colors duration-300 relative z-10">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+    <section id="projects" className="py-14 sm:py-24 border-t border-zinc-200 bg-white transition-colors duration-300 relative z-10 w-full max-w-full overflow-hidden">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 min-w-0">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-10 gap-3 sm:gap-4">
           <div>
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-700 text-xs font-semibold uppercase tracking-wider mb-3">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-700 text-xs font-semibold uppercase tracking-wider mb-2.5">
               <Sparkles size={12} /> Verified Deployments
             </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-zinc-900 tracking-tight">
+            <h2 className="text-2xl sm:text-4xl font-extrabold text-zinc-900 tracking-tight">
               Featured Systems & Deployments
             </h2>
-            <p className="text-sm text-zinc-500 mt-2 max-w-md">
+            <p className="text-xs sm:text-sm text-zinc-500 mt-2 max-w-md">
               All 8 production applications with live deployments, custom UI mockups, and architectural blueprints.
             </p>
           </div>
@@ -144,9 +144,9 @@ export default function Projects({ onSelectProject, activeSkillFilter, onClearSk
         )}
 
         {/* Filters & Search Toolbar */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-10 pb-6 border-b border-zinc-200">
+        <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3 sm:gap-4 mb-8 sm:mb-10 pb-4 sm:pb-6 border-b border-zinc-200">
           {/* Category Pills */}
-          <div className="flex items-center gap-2 overflow-x-auto w-full md:w-auto pb-2 md:pb-0 scrollbar-none">
+          <div className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto w-full md:w-auto pb-2 md:pb-0 scrollbar-none">
             {categories.map((cat) => {
               const count = cat === 'All' 
                 ? projects.length 

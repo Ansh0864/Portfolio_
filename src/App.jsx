@@ -36,7 +36,7 @@ export default function App() {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col bg-white text-zinc-900 font-sans selection:bg-sky-100 selection:text-sky-900 transition-colors duration-300 relative">
+    <div className="min-h-screen flex flex-col bg-white text-zinc-900 font-sans selection:bg-sky-100 selection:text-sky-900 transition-colors duration-300 relative w-full max-w-full overflow-x-hidden">
       {/* Custom Circular Cursor (matching Mobineers) */}
       <CustomCursor />
 
@@ -44,9 +44,9 @@ export default function App() {
       <Navbar />
 
       {/* Main Content Sections */}
-      <main className="flex-grow">
+      <main className="flex-grow w-full max-w-full min-w-0 overflow-x-hidden">
         {/* Stage 1: Hero stays pinned until Experience overcomes it */}
-        <div className="relative">
+        <div className="relative w-full max-w-full overflow-x-hidden">
           <Hero />
           <Experience />
         </div>

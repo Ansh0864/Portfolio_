@@ -408,19 +408,19 @@ export default function Skills({ onSkillClick, onSelectProject }) {
   ];
 
   return (
-    <section id="skills" className="py-20 md:py-24 border-t border-zinc-200 bg-white transition-colors duration-300">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+    <section id="skills" className="py-14 sm:py-24 border-t border-zinc-200 bg-white transition-colors duration-300 w-full max-w-full overflow-hidden">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 min-w-0">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-10 gap-3 sm:gap-4">
           <div>
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-semibold uppercase tracking-wider mb-3">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-semibold uppercase tracking-wider mb-2.5">
               <Sparkles size={12} /> Interactive Tech Matrix & Live Inspector
             </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-zinc-900 tracking-tight">
+            <h2 className="text-2xl sm:text-4xl font-extrabold text-zinc-900 tracking-tight">
               Skills & Stack Matrix
             </h2>
-            <p className="text-sm text-zinc-500 mt-2 max-w-xl">
+            <p className="text-xs sm:text-sm text-zinc-500 mt-2 max-w-xl">
               Click any technology chip below to inspect architecture implementations, production metrics, or immediately open the live matching projects.
             </p>
           </div>
@@ -433,12 +433,11 @@ export default function Skills({ onSkillClick, onSelectProject }) {
               value={searchQuery}
               onChange={(e) => {
                 setSearchQuery(e.target.value);
-                // If search matches skills, activate first match
                 const match = allSkillsList.find(s => s.name.toLowerCase().includes(e.target.value.toLowerCase().trim()));
                 if (match) setActiveSkillName(match.name);
               }}
               placeholder="Search 35 technologies..."
-              className="w-full pl-9 pr-3.5 py-2.5 text-xs bg-zinc-50 border border-zinc-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-sky-500/20 text-zinc-900 placeholder-zinc-400 transition-all"
+              className="w-full pl-9 pr-3.5 py-2 sm:py-2.5 text-xs bg-zinc-50 border border-zinc-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-sky-500/20 text-zinc-900 placeholder-zinc-400 transition-all"
             />
             {searchQuery && (
               <button 
@@ -479,20 +478,20 @@ export default function Skills({ onSkillClick, onSelectProject }) {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-start">
           
           {/* Left: Interactive Skill Pills Grid (7 Cols) */}
-          <div className="lg:col-span-7 space-y-6">
-            <div className="glass-card rounded-2xl p-4 sm:p-6 border border-zinc-200 shadow-sm">
-              <div className="flex items-center justify-between mb-4 pb-3 border-b border-zinc-100">
-                <span className="text-xs font-semibold text-zinc-500 uppercase tracking-wider flex items-center gap-1.5">
+          <div className="lg:col-span-7 space-y-4 sm:space-y-6">
+            <div className="glass-card rounded-2xl p-3.5 sm:p-6 border border-zinc-200 shadow-sm">
+              <div className="flex items-center justify-between mb-3 sm:mb-4 pb-2.5 sm:pb-3 border-b border-zinc-100">
+                <span className="text-[11px] sm:text-xs font-semibold text-zinc-500 uppercase tracking-wider flex items-center gap-1.5">
                   <Zap size={13} className="text-amber-500" />
                   Showing {filteredSkills.length} Verified Technologies
                 </span>
-                <span className="text-[11px] text-zinc-400">
-                  Click any chip to inspect
+                <span className="text-[10px] sm:text-[11px] text-zinc-400">
+                  Tap chip to inspect
                 </span>
               </div>
 
               {filteredSkills.length === 0 ? (
-                <div className="py-12 text-center">
+                <div className="py-10 text-center">
                   <p className="text-xs text-zinc-400 mb-2">No technologies match "{searchQuery}"</p>
                   <button 
                     onClick={() => { setSearchQuery(''); setSelectedCategoryTab('All'); }}
@@ -502,25 +501,25 @@ export default function Skills({ onSkillClick, onSelectProject }) {
                   </button>
                 </div>
               ) : (
-                <div className="flex flex-wrap gap-2.5">
+                <div className="flex flex-wrap gap-1.5 sm:gap-2.5 max-h-[320px] sm:max-h-none overflow-y-auto sm:overflow-visible pr-1">
                   {filteredSkills.map((skill, idx) => {
                     const isSelected = activeSkillName === skill.name;
                     return (
                       <button
                         key={idx}
                         onClick={() => handleSkillChipClick(skill.name)}
-                        className={`inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all duration-200 text-left cursor-pointer border ${
+                        className={`inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3.5 py-1.5 sm:py-2.5 rounded-xl text-[11px] sm:text-xs font-semibold transition-all duration-200 text-left cursor-pointer border ${
                           isSelected
-                            ? 'bg-zinc-900 text-white border-zinc-900 shadow-md scale-105 ring-2 ring-indigo-500/30'
-                            : 'bg-zinc-50/90 hover:bg-zinc-100 border-zinc-200/90 text-zinc-800 hover:border-zinc-300 shadow-2xs hover:scale-102'
+                            ? 'bg-zinc-900 text-white border-zinc-900 shadow-sm scale-102 ring-2 ring-indigo-500/30'
+                            : 'bg-zinc-50/90 hover:bg-zinc-100 border-zinc-200/90 text-zinc-800 hover:border-zinc-300 shadow-2xs'
                         }`}
                       >
                         <CheckCircle2 
-                          size={14} 
+                          size={12} 
                           className={isSelected ? "text-emerald-400" : "text-zinc-400"} 
                         />
                         <span>{skill.name}</span>
-                        <span className={`text-[10px] font-mono px-1.5 py-0.5 rounded ${
+                        <span className={`text-[9px] sm:text-[10px] font-mono px-1.5 py-0.5 rounded hidden sm:inline-block ${
                           isSelected ? 'bg-zinc-800 text-zinc-200' : 'bg-zinc-200/70 text-zinc-600'
                         }`}>
                           {skill.level}
@@ -533,7 +532,7 @@ export default function Skills({ onSkillClick, onSelectProject }) {
             </div>
 
             {/* Helper Banner with quick filter action */}
-            <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-sky-50 via-indigo-50 to-purple-50 border border-indigo-100/90 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs">
+            <div className="p-3.5 sm:p-5 rounded-2xl bg-gradient-to-r from-sky-50 via-indigo-50 to-purple-50 border border-indigo-100/90 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs">
               <div className="flex items-center gap-2.5 text-indigo-950 font-medium">
                 <Sparkles size={16} className="text-indigo-600 shrink-0" />
                 <span>Want to see projects engineered with <strong>{activeSkill.name}</strong>?</span>

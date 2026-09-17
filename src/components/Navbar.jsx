@@ -46,10 +46,10 @@ export default function Navbar() {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
           ? 'bg-white/95 backdrop-blur-md border-b border-zinc-200/80 shadow-sm py-3'
-          : 'bg-transparent py-5'
+          : 'bg-white/90 sm:bg-transparent backdrop-blur-md sm:backdrop-blur-none border-b border-zinc-200/60 sm:border-transparent py-3.5 sm:py-5'
       }`}
     >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between min-w-0">
         {/* Brand Logo & Status */}
         <a href="#hero" className="flex items-center gap-3 group">
           <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-sky-600 via-indigo-600 to-purple-600 text-white flex items-center justify-center font-bold text-lg shadow-sm group-hover:scale-105 transition-all duration-300">
